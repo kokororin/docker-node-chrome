@@ -2,9 +2,6 @@ ARG BASE_IMAGE=node:14
 FROM ${BASE_IMAGE}
 LABEL maintainer "kokororin <i@kotori.love>"
 
-ARG REFRESHED_AT
-ENV REFRESHED_AT $REFRESHED_AT
-
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
     wget \

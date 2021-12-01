@@ -2,6 +2,8 @@ name: buildx
 
 on:
   push:
+  schedule:
+    - cron: "30 04 * * *"
 
 jobs:
   buildx:
@@ -73,7 +75,6 @@ jobs:
           context: ${{ matrix.docker-file.path }}
           file: ${{ matrix.docker-file.path }}/Dockerfile
           build-args: |
-            REFRESHED_AT=$(date +%Y-%m-%d)
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
@@ -93,7 +94,6 @@ jobs:
           context: ${{ matrix.docker-file.path }}/
           file: ${{ matrix.docker-file.path }}/Dockerfile
           build-args: |
-            REFRESHED_AT=$(date +%Y-%m-%d)
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
