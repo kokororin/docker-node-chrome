@@ -11,15 +11,23 @@ jobs:
       matrix:
         docker-file:
           - path: .
-            file: Dockerfile
             base-img: node:14
             tags: "14 latest"
             platforms: linux/amd64
 
           - path: .
-            file: Dockerfile-slim
             base-img: node:14-slim
             tags: "14-slim slim"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:16
+            tags: "16"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:16
+            tags: "16-slim"
             platforms: linux/amd64
 
 
@@ -63,7 +71,7 @@ jobs:
         with:
           push: false
           context: ${{ matrix.docker-file.path }}
-          file: ${{ matrix.docker-file.path }}/${{ matrix.docker-file.file }}
+          file: ${{ matrix.docker-file.path }}/Dockerfile
           build-args: |
             REFRESHED_AT=$(date +%Y-%m-%d)
             BASE_IMAGE=${{ matrix.docker-file.base-img }}

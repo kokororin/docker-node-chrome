@@ -9,6 +9,7 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
+    gnupg \
     curl \
     unzip
 
