@@ -13,6 +13,16 @@ jobs:
       matrix:
         docker-file:
           - path: .
+            base-img: node:12
+            tags: "12"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:12-slim
+            tags: "12-slim"
+            platforms: linux/amd64
+
+          - path: .
             base-img: node:14
             tags: "14 latest"
             platforms: linux/amd64
