@@ -10,12 +10,12 @@ jobs:
       fail-fast: false
       matrix:
         docker-file:
-          - path: 14
+          - path: .
             file: Dockerfile
             tags: "14 latest"
             platforms: linux/amd64
 
-          - path: 14
+          - path: .
             file: Dockerfile-slim
             tags: "14-slim slim"
             platforms: linux/amd64
@@ -60,9 +60,11 @@ jobs:
         if: success() && !contains(github.ref, 'master')
         with:
           push: false
-          context: ./${{ matrix.docker-file.path }}
-          file: ./${{ matrix.docker-file.path }}/${{ matrix.docker-file.file }}
-          build-args: REFRESHED_AT=$(date +%Y-%m-%d)
+          context: ${{ matrix.docker-file.path }}
+          file: ${{ matrix.docker-file.path }}/${{ matrix.docker-file.file }}
+          build-args: |
+            REFRESHED_AT=$(date +%Y-%m-%d)
+            BASE_IMAGE=${{ matrix.docker-file.base-img }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
 
