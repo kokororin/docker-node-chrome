@@ -16,7 +16,6 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y google-chrome-stable && \
     apt-get remove unzip && \
-    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && wget -q http://ftp.cn.debian.org/debian/pool/main/f/fonts-noto-cjk/fonts-noto-cjk_20201206-cjk+repack1-1_all.deb -O fonts-noto-cjk.deb && \
