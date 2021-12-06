@@ -4,6 +4,6 @@
 [![buildx Status](https://github.com/kokororin/docker-node-chrome/workflows/buildx/badge.svg)](https://github.com/kokororin/docker-node-chrome/actions?query=workflow%3Abuildx)
 
 - Node.js 12 or Node.js 14 or Node.js 16
-- npm 6 (< Node.js 16) or npm 7 (Node.js 16)
+- npm 7
 - yarn
 - Chrome stable
