@@ -2,6 +2,8 @@ ARG BASE_IMAGE=node:14
 FROM ${BASE_IMAGE}
 LABEL maintainer "kokororin <i@kotori.love>"
 
+ARG TAGS=14-slim-with-python
+
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
     wget \
@@ -9,6 +11,10 @@ RUN apt-get update -y && \
     gnupg \
     curl \
     unzip
+
+RUN if [ -z "${TAGS##*python*}" ]; then \
+        apt-get install -y python build-essential; \
+    fi
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list" && \

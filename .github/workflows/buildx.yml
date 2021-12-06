@@ -23,6 +23,11 @@ jobs:
             platforms: linux/amd64
 
           - path: .
+            base-img: node:12-slim
+            tags: "12-slim-with-python"
+            platforms: linux/amd64
+
+          - path: .
             base-img: node:14
             tags: "14 latest"
             platforms: linux/amd64
@@ -33,6 +38,11 @@ jobs:
             platforms: linux/amd64
 
           - path: .
+            base-img: node:14
+            tags: "14-slim-with-python"
+            platforms: linux/amd64
+
+          - path: .
             base-img: node:16
             tags: "16"
             platforms: linux/amd64
@@ -40,6 +50,11 @@ jobs:
           - path: .
             base-img: node:16
             tags: "16-slim"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:16
+            tags: "16-slim-with-python"
             platforms: linux/amd64
 
 
@@ -86,6 +101,7 @@ jobs:
           file: ${{ matrix.docker-file.path }}/Dockerfile
           build-args: |
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
+            TAGS=${{ matrix.docker-file.tags }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
 
@@ -105,5 +121,6 @@ jobs:
           file: ${{ matrix.docker-file.path }}/Dockerfile
           build-args: |
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
+            TAGS=${{ matrix.docker-file.tags }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
