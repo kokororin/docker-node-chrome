@@ -13,8 +13,10 @@ RUN apt-get update -y && \
     unzip
 
 RUN if [ -z "${TAGS##*python*}" ]; then \
-        apt-get install -y python build-essential; \
+        apt-get install -y python python3 build-essential; \
     fi
+
+RUN npm update -g && npm install -g pnpm
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list" && \
