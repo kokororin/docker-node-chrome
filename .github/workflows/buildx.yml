@@ -3,7 +3,7 @@ name: buildx
 on:
   push:
   schedule:
-    - cron: "30 04 * * *"
+    - cron: "30 04 * * MON"
 
 jobs:
   buildx:

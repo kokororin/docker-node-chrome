@@ -2,7 +2,7 @@ ARG BASE_IMAGE=node:14
 FROM ${BASE_IMAGE}
 LABEL maintainer "kokororin <i@kotori.love>"
 
-ARG TAGS=14-slim-with-python
+ARG TAGS=14
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
