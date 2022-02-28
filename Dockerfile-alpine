@@ -1,0 +1,35 @@
+ARG BASE_IMAGE=node:14-apline
+FROM ${BASE_IMAGE}
+LABEL maintainer "kokororin <i@kotori.love>"
+
+ARG TAGS=14
+
+RUN echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
+  && echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+  && apk -U upgrade \
+  && apk add --no-cache \
+    chromium@edge \
+    nss@edge \
+    freetype@edge \
+    harfbuzz@edge \
+    ttf-freefont@edge \
+    libstdc++@edge \
+    wayland-libs-client@edge \
+    wayland-libs-server@edge \
+    wayland-libs-cursor@edge \
+    wayland-libs-egl@edge \
+    wayland@edge
+
+RUN if [ -z "${TAGS##*python*}" ]; then \
+        apk add --no-cache \
+        vips-dev \
+        build-base \
+        python \
+        python3 \
+        .gyp \
+        make \
+        g++; \
+    fi
+
+ENV CHROME_BIN /usr/bin/google-chrome-stable
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true

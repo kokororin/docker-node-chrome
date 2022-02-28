@@ -13,49 +13,82 @@ jobs:
       matrix:
         docker-file:
           - path: .
+            file-name: Dockerfile
             base-img: node:12
             tags: "12"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile
             base-img: node:12-slim
             tags: "12-slim"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile
             base-img: node:12-slim
             tags: "12-slim-with-python"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:12-alpine
+            tags: "12-alpine"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
+            file-name: Dockerfile
             base-img: node:14
             tags: "14 latest"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile
             base-img: node:14-slim
             tags: "14-slim slim"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile
             base-img: node:14
             tags: "14-slim-with-python"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:14-alpine
+            tags: "14-alpine"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
+            file-name: Dockerfile
             base-img: node:16
             tags: "16"
             platforms: linux/amd64
 
           - path: .
+            file-name: Dockerfile
             base-img: node:16
             tags: "16-slim"
             platforms: linux/amd64
 
           - path: .
             base-img: node:16
+            file-name: Dockerfile
             tags: "16-slim-with-python"
             platforms: linux/amd64
+
+          - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:16-alpine
+            tags: "16-alpine"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:16-alpine-with-python
+            tags: "16-alpine-with-python"
+            platforms: linux/amd64,linux/arm64
 
 
     steps:
@@ -98,7 +131,7 @@ jobs:
         with:
           push: false
           context: ${{ matrix.docker-file.path }}
-          file: ${{ matrix.docker-file.path }}/Dockerfile
+          file: ${{ matrix.docker-file.path }}/${{ matrix.docker-file.file-name }}
           build-args: |
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
             TAGS=${{ matrix.docker-file.tags }}
@@ -118,7 +151,7 @@ jobs:
         with:
           push: true
           context: ${{ matrix.docker-file.path }}/
-          file: ${{ matrix.docker-file.path }}/Dockerfile
+          file: ${{ matrix.docker-file.path }}/${{ matrix.docker-file.file-name }}
           build-args: |
             BASE_IMAGE=${{ matrix.docker-file.base-img }}
             TAGS=${{ matrix.docker-file.tags }}
