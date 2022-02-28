@@ -20,16 +20,7 @@ RUN echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/
     wayland-libs-egl@edge \
     wayland@edge
 
-RUN if [ -z "${TAGS##*python*}" ]; then \
-        apk add --no-cache \
-        vips-dev \
-        build-base \
-        python \
-        python3 \
-        .gyp \
-        make \
-        g++; \
-    fi
+RUN apk add wqy-zenhei --update-cache --repository https://nl.alpinelinux.org/alpine/edge/testing
 
 ENV CHROME_BIN /usr/bin/google-chrome-stable
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
