@@ -37,6 +37,12 @@ jobs:
             platforms: linux/amd64,linux/arm64
 
           - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:12-alpine
+            tags: "12-alpine-with-python"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
             file-name: Dockerfile
             base-img: node:14
             tags: "14 latest"
@@ -58,6 +64,12 @@ jobs:
             file-name: Dockerfile-alpine
             base-img: node:14-alpine
             tags: "14-alpine"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:14-alpine
+            tags: "14-alpine-with-python"
             platforms: linux/amd64,linux/arm64
 
           - path: .
@@ -86,7 +98,7 @@ jobs:
 
           - path: .
             file-name: Dockerfile-alpine
-            base-img: node:16-alpine-with-python
+            base-img: node:16-alpine
             tags: "16-alpine-with-python"
             platforms: linux/amd64,linux/arm64
 
@@ -157,3 +169,8 @@ jobs:
             TAGS=${{ matrix.docker-file.tags }}
           platforms: ${{ matrix.docker-file.platforms }}
           tags: ${{ steps.prepare.outputs.tags }}
+
+      - name: Inspect Image
+        if: always() && github.event_name != 'pull_request' && contains(github.ref, 'master')
+        run: |
+          docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
