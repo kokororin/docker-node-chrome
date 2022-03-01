@@ -22,5 +22,5 @@ RUN echo @edge https://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/
 
 RUN apk add wqy-zenhei --update-cache --repository https://nl.alpinelinux.org/alpine/edge/testing
 
-ENV CHROME_BIN /usr/bin/google-chrome-stable
+ENV CHROME_BIN /usr/bin/chromium-browser
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
