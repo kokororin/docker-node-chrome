@@ -39,7 +39,7 @@ jobs:
           - path: .
             file-name: Dockerfile
             base-img: node:14
-            tags: "14 latest"
+            tags: "14"
             platforms: linux/amd64
 
           - path: .
@@ -87,7 +87,7 @@ jobs:
           - path: .
             file-name: Dockerfile
             base-img: node:17
-            tags: "17"
+            tags: "17 latest"
             platforms: linux/amd64
 
           - path: .
