@@ -84,6 +84,30 @@ jobs:
             tags: "16-alpine"
             platforms: linux/amd64,linux/arm64
 
+          - path: .
+            file-name: Dockerfile
+            base-img: node:17
+            tags: "17"
+            platforms: linux/amd64
+
+          - path: .
+            file-name: Dockerfile
+            base-img: node:17
+            tags: "17-slim"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:17
+            file-name: Dockerfile
+            tags: "17-slim-with-python"
+            platforms: linux/amd64
+
+          - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:17-alpine
+            tags: "17-alpine"
+            platforms: linux/amd64,linux/arm64
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
