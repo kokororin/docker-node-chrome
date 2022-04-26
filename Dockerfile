@@ -29,6 +29,8 @@ RUN cd /tmp && wget -q http://ftp.cn.debian.org/debian/pool/main/f/fonts-noto-cj
     fc-cache -f -v && \
     rm -f /tmp/fonts-noto-cjk.deb && \
     rm -rf /tmp/source-sans*
+    
+RUN npm install -g pnpm@latest
 
 ENV CHROME_BIN /usr/bin/google-chrome-stable
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
