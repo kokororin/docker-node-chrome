@@ -87,7 +87,7 @@ jobs:
           - path: .
             file-name: Dockerfile
             base-img: node:17
-            tags: "17 latest"
+            tags: "17"
             platforms: linux/amd64
 
           - path: .
@@ -106,6 +106,30 @@ jobs:
             file-name: Dockerfile-alpine
             base-img: node:17-alpine
             tags: "17-alpine"
+            platforms: linux/amd64,linux/arm64
+
+          - path: .
+            file-name: Dockerfile
+            base-img: node:18
+            tags: "18 latest"
+            platforms: linux/amd64
+
+          - path: .
+            file-name: Dockerfile
+            base-img: node:18
+            tags: "18-slim"
+            platforms: linux/amd64
+
+          - path: .
+            base-img: node:18
+            file-name: Dockerfile
+            tags: "18-slim-with-python"
+            platforms: linux/amd64
+
+          - path: .
+            file-name: Dockerfile-alpine
+            base-img: node:18-alpine
+            tags: "18-alpine"
             platforms: linux/amd64,linux/arm64
 
     steps:
